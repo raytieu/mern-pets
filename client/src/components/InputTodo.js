@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useRef } from "react";
 
 const InputTodo = () => {
+  const addRef = useRef(null);
   const [description, setDescription] = useState("");
 
   const onSubmitForm = async (e) => {
@@ -12,7 +13,8 @@ const InputTodo = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      window.location = "/";
+      setDescription("");
+      addRef.current.focus();
     } catch (err) {
       console.error(err.message);
     }
@@ -27,6 +29,7 @@ const InputTodo = () => {
           className="form-control"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          ref={addRef}
         />
         <button className="btn btn-success">Add</button>
       </form>
