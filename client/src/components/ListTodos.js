@@ -37,6 +37,7 @@ const ListTodos = () => {
       <table class="table mt-5 text-center">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Description</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -50,8 +51,10 @@ const ListTodos = () => {
           </tr> */}
 
           {todos
+            .sort((a, b) => a.todo_id - b.todo_id)
             .map((todo) => (
               <tr key={todo.todo_id}>
+                <td>{todo.todo_id}</td>
                 <td>{todo.description}</td>
                 <td>
                   <EditTodo todo={todo} />
@@ -65,8 +68,7 @@ const ListTodos = () => {
                   </button>
                 </td>
               </tr>
-            ))
-            .sort((a, b) => a - b)}
+            ))}
         </tbody>
       </table>
     </Fragment>
